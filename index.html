@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Whiskey Advent 2025</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Whiskey Advent Calendar 2025</h1>
+      <p>One legendary pour each day from Dec 14 to Christmas</p>
+    </header>
+
+    <div id="password-screen">
+      <input type="password" id="pass" placeholder="Enter password" />
+      <button onclick="checkPassword()">Unlock Calendar</button>
+    </div>
+
+    <p id="status" class="hidden"></p>
+    <div id="calendar" class="hidden"></div>
+    <p id="next-hint" class="hidden"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
