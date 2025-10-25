@@ -1,17 +1,3 @@
-const PASSWORD = "whiskey2025";
-
-function checkPassword() {
-  const input = document.getElementById('pass').value.trim();
-  if (input === PASSWORD) {
-    document.getElementById('password-screen').classList.add('hidden');
-    document.getElementById('status').classList.remove('hidden');
-    document.getElementById('calendar').classList.remove('hidden');
-    loadCalendar();
-  } else {
-    alert("Wrong password. Ask the host.");
-  }
-}
-
 async function loadCalendar() {
   const status = document.getElementById('status');
   status.textContent = "Loading...";
@@ -19,10 +5,19 @@ async function loadCalendar() {
   try {
     const res = await fetch('whiskeys.json');
     const whiskeys = await res.json();
-    const today = new Date(); today.setHours(0,0,0,0);
 
-    const revealed = whiskeys.filter(w => new Date(w.date) <= today).map(({date, ...rest}) => rest);
-    const next = whiskeys.find(w => new Date(w.date) > today);
+    // SET 8:00 AM EST AS UNLOCK TIME
+    const now = new Date();
+    const estOffset = -5 * 60; // EST = UTC-5
+    const estNow = new Date(now.getTime() + estOffset * 60 * 1000);
+    estNow.setHours(8, 0, 0, 0); // 8:00 AM EST
+    const today = estNow;
+
+    const revealed = whiskeys
+      .filter(w => new Date(w.date + 'T08:00:00-05:00') <= today)
+      .map(({date, ...rest}) => rest);
+
+    const next = whiskeys.find(w => new Date(w.date + 'T08:00:00-05:00') > today);
 
     const calendar = document.getElementById('calendar');
     calendar.innerHTML = '';
@@ -34,13 +29,16 @@ async function loadCalendar() {
     });
 
     if (next) {
-      const nextDate = new Date(next.date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-      document.getElementById('next-hint').textContent = `Next pour: ${nextDate}`;
+      const nextDate = new Date(next.date + 'T08:00:00-05:00');
+      const formatted = nextDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) + 
+                       ` at 8:00 AM EST`;
+      document.getElementById('next-hint').textContent = `Next pour: ${formatted}`;
       document.getElementById('next-hint').classList.remove('hidden');
     }
 
     status.innerHTML = `Revealed: <strong>${revealed.length}</strong> of 12`;
   } catch (err) {
     status.textContent = "Error. Try refreshing.";
+    console.error(err);
   }
 }
