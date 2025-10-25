@@ -1,3 +1,17 @@
+const PASSWORD = "whiskey2025";
+
+function checkPassword() {
+  const input = document.getElementById('pass').value.trim();
+  if (input === PASSWORD) {
+    document.getElementById('password-screen').classList.add('hidden');
+    document.getElementById('status').classList.remove('hidden');
+    document.getElementById('calendar').classList.remove('hidden');
+    loadCalendar();
+  } else {
+    alert("Wrong password. Ask the host.");
+  }
+}
+
 async function loadCalendar() {
   const status = document.getElementById('status');
   status.textContent = "Loading...";
@@ -21,7 +35,6 @@ async function loadCalendar() {
       const unlockTime = new Date(w.date + 'T08:00:00-05:00');
 
       if (estNow >= unlockTime) {
-        // Unlocked!
         const div = document.createElement('div');
         div.className = 'day';
         div.innerHTML = `
