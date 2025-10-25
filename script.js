@@ -1,7 +1,7 @@
 const PASSWORD = "whiskey2025";
 
 // TOGGLE: true = test mode (October), false = live (December)
-const TEST_MODE = false;
+const TEST_MODE = true;
 
 function checkPassword() {
   const input = document.getElementById('pass').value.trim();
