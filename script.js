@@ -7,8 +7,7 @@ function checkPassword() {
     document.getElementById('status').classList.remove('hidden');
     document.getElementById('calendar').classList.remove('hidden');
     document.getElementById('next-hint').classList.remove('hidden');
-    loadCalendar();
-    startCountdown();
+    loadCalendar().then(startCountdown); // Wait for load → then start
   } else {
     alert("Wrong password. Ask the host.");
   }
@@ -19,12 +18,12 @@ async function loadCalendar() {
   status.textContent = "Loading...";
 
   try {
-    const res = await fetch('whiskeys.json');
+    const res = await fetch('w.json');
     if (!res.ok) throw new Error('Failed to load whiskeys.json');
     const whiskeys = await res.json();
 
     const now = new Date();
-    const estOffset = -5 * 60; // EST = UTC-5
+    const estOffset = -5 * 60;
     const estNow = new Date(now.getTime() + estOffset * 60 * 1000);
 
     const calendar = document.getElementById('calendar');
@@ -41,7 +40,7 @@ async function loadCalendar() {
           <h3>Day ${w.day}</h3>
           <p><strong>${w.name}</strong></p>
           <p>${w.distiller}</p>
-          ${w.notes ? `<p><em>${w笔记}</em></p>` : ''}
+          ${w.notes ? `<p><em>${w.notes}</em></p>` : ''}
           ${w.selectedBy ? `<p>Selected by: <strong>${w.selectedBy}</strong></p>` : ''}
           <p>${w.type} • ${w.age} • ${w.proof}</p>
         `;
@@ -78,33 +77,39 @@ async function loadCalendar() {
 
 function startCountdown() {
   const countdownEl = document.getElementById('countdown');
-  if (countdownEl) {
-    setInterval(() => {
-      const now = new Date();
-      const estOffset = -5 * 60;
-      const estNow = new Date(now.getTime() + estOffset * 60 * 1000);
+  if (!countdownEl) return;
 
-      let nextUnlock = new Date(estNow);
-      nextUnlock.setHours(8, 0, 0, 0);
-      if (estNow >= nextUnlock) {
-        nextUnlock.setDate(nextUnlock.getDate() + 1);
-      }
+  // Run immediately once
+  updateCountdown(countdownEl);
 
-      const diff = nextUnlock - estNow;
-      if (diff <= 0) {
-        countdownEl.textContent = "UNLOCKED!";
-        loadCalendar();
-        return;
-      }
+  // Then every second
+  setInterval(() => updateCountdown(countdownEl), 1000);
+}
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+function updateCountdown(el) {
+  const now = new Date();
+  const estOffset = -5 * 60;
+  const estNow = new Date(now.getTime() + estOffset * 60 * 1000);
 
-      countdownEl.innerHTML = days > 0 
-        ? `${days}d ${hours}h ${minutes}m ${seconds}s`
-        : `${hours}h ${minutes}m ${seconds}s`;
-    }, 1000);
+  let nextUnlock = new Date(estNow);
+  nextUnlock.setHours(8, 0, 0, 0);
+  if (estNow >= nextUnlock) {
+    nextUnlock.setDate(nextUnlock.getDate() + 1);
   }
+
+  const diff = nextUnlock - estNow;
+  if (diff <= 0) {
+    el.textContent = "UNLOCKED!";
+    loadCalendar();
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  el.innerHTML = days > 0 
+    ? `${days}d ${hours}h ${minutes}m ${seconds}s`
+    : `${hours}h ${minutes}m ${seconds}s`;
 }
