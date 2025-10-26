@@ -109,4 +109,10 @@ function updateCountdown(el) {
   el.innerHTML = days > 0 
     ? `${days}d ${hours}h ${minutes}m ${seconds}s`
     : `${hours}h ${minutes}m ${seconds}s`;
+
+  // DEBUG: Test image loading
+const img = new Image();
+img.src = 'Day 1.jpg';
+img.onload = () => console.log('✅ Day 1.jpg LOADED');
+img.onerror = () => console.log('❌ Day 1.jpg FAILED');
 }
