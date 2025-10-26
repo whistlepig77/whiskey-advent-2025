@@ -1,58 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Whiskey Advent 2025</title>
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    .taster-instructions {
-      text-align: left;
-      margin-top: 20px;
-      max-width: 700px;
-    }
-    .taster-instructions h3 {
-      margin-bottom: 10px;
-    }
-    .taster-instructions ol {
-      margin: 10px 0;
-      padding-left: 20px;
-    }
-    .taster-instructions p {
-      margin-top: 12px;
-      font-style: italic;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <h1>Whiskey Advent Calendar 2025</h1>
-      <p><strong>Our 12-Day Whiskey Countdown to Christmas!</strong><br>
-      <em>The traditional "12 Days of Christmas" run from Dec 25 to Jan 5. But we’re doing it our way: <strong>one legendary pour each day from Dec 14 to Christmas Day</strong> — because who waits that long for good whiskey?</em></p>
+const PASSWORD = "wally";  // ← CHANGED TO "wally"
 
-      <div class="taster-instructions">
-        <h3>How to Taste (Blind Style)</h3>
-        <ol>
-          <li>On <strong>December 14</strong>, open bottle marked <strong>#1</strong>.</li>
-          <li>Pour, swirl, nose, sip — <strong>take mental or written notes</strong> (flavor, finish, guesses).</li>
-          <li>Come back here at <strong>8:00 AM EST</strong> to <strong>reveal the whiskey</strong>.</li>
-          <li>Repeat daily — <strong>one pour, one reveal</strong> — until Christmas!</li>
-        </ol>
-        <p>No peeking. Trust your palate. Let the whiskey speak.</p>
-      </div>
-    </header>
+function checkPassword() {
+  const input = document.getElementById('pass').value.trim();
+  if (input === PASSWORD) {
+  document.getElementById('password-screen').classList.add('hidden');
+    document.getElementById('status').classList.remove('hidden');
+    document.getElementById('calendar').classList.remove('hidden');
+    document.getElementById('next-hint').classList.remove('hidden');
+    loadCalendar().then(startCountdown);
+  } else {
+    alert("Wrong password. Ask the host.");
+  }
+}
 
-    <div id="password-screen">
-      <input type="password" id="pass" placeholder="Enter password" />
-      <button onclick="checkPassword()">Unlock Calendar</button>
-    </div>
+async function loadCalendar() {
+  const status = document.getElementById('status');
+  status.textContent = "Loading...";
 
-    <p id="status" class="hidden"></p>
-    <div id="calendar" class="hidden"></div>
-    <p id="next-hint" class="hidden"></p>
-  </div>
+  try {
+    const res = await fetch('whiskeys.json');
+    if (!res.ok) throw new Error('Failed to load whiskeys.json');
+    const whiskeys = await res.json();
 
-  <script src="script.js"></script>
-</body>
-</html>
+    const now = new Date();
+    const estOffset = -5 * 60; // EST = UTC-5
+    const estNow = new Date(now.getTime() + estOffset * 60 * 1000);
+
+    const calendar = document.getElementById('calendar');
+    calendar.innerHTML = '';
+
+    let revealedCount = 0;
+
+    whiskeys.forEach(w => {
+      const unlockTime = new Date(w.date + 'T08:00:00-05:00');
+      if (estNow >= unlockTime) {
+        const div = document.createElement('div');
+        div.className = 'day';
+        div.innerHTML = `
+          <h3>Day ${w.day}</h3>
+          <p><strong>${w.name}</strong></p>
+          <p>${w.distiller}</p>
+          ${w.notes ? `<p><em>${w.notes}</em></p>` : ''}
+          ${w.selectedBy ? `<p>Selected by: <strong>${w.selectedBy}</strong></p>` : ''}
+          <p>${w.type} • ${w.age} • ${w.proof}</p>
+        `;
+        calendar.appendChild(div);
+        revealedCount++;
+      }
+    });
+
+    const nextWhiskey = whiskeys.find(w => {
+      const unlockTime = new Date(w.date + 'T08:00:00-05:00');
+      return estNow < unlockTime;
+    });
+
+    const nextHint = document.getElementById('next-hint');
+    if (nextWhiskey) {
+      const nextDate = new Date(nextWhiskey.date + 'T08:00:00-05:00');
+      const formatted = nextDate.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric'
+      });
+      nextHint.innerHTML = `Next pour in: <strong id="countdown">Calculating...</strong> (${formatted} at 8:00 AM EST)`;
+    } else {
+      nextHint.textContent = "All whiskeys revealed! Merry Christmas!";
+    }
+
+    status.innerHTML = `Revealed: <strong>${revealedCount}</strong> of 12`;
+
+  } catch (err) {
+    status.textContent = "Error. Try refreshing.";
+    console.error(err);
+  }
+}
+
+function startCountdown() {
+  const countdownEl = document.getElementById('countdown');
+  if (!countdownEl) return;
+
+  // Run immediately
+  updateCountdown(countdownEl);
+
+  // Then every second
+  setInterval(() => updateCountdown(countdownEl), 1000);
+}
+
+function updateCountdown(el) {
+  const now = new Date();
+  const estOffset = -5 * 60;
+  const estNow = new Date(now.getTime() + estOffset * 60 * 1000);
+
+  let nextUnlock = new Date(estNow);
+  nextUnlock.setHours(8, 0, 0, 0);
+  if (estNow >= nextUnlock) {
+    nextUnlock.setDate(nextUnlock.getDate() + 1);
+  }
+
+  const diff = nextUnlock - estNow;
+  if (diff <= 0) {
+    el.textContent = "UNLOCKED!";
+    loadCalendar();
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  el.innerHTML = days > 0 
+    ? `${days}d ${hours}h ${minutes}m ${seconds}s`
+    : `${hours}h ${minutes}m ${seconds}s`;
+}
