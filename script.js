@@ -18,8 +18,8 @@ async function loadCalendar() {
   status.textContent = "Loading...";
 
   try {
-    const res = await fetch('whiskeys.json');
-    if (!res.ok) throw new Error('Failed to load whiskeys.json');
+    const res = await fetch('whiskeys_test.json');
+    if (!res.ok) throw new Error('Failed to load whiskeys_test.json');
     const whiskeys = await res.json();
 
     const now = new Date();
