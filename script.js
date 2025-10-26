@@ -23,7 +23,7 @@ async function loadCalendar() {
     const whiskeys = await res.json();
 
     const now = new Date();
-    const estOffset = -5 * 60;
+    const estOffset = -5 * 60; // EST = UTC-5
     const estNow = new Date(now.getTime() + estOffset * 60 * 1000);
 
     const calendar = document.getElementById('calendar');
@@ -36,7 +36,14 @@ async function loadCalendar() {
       if (estNow >= unlockTime) {
         const div = document.createElement('div');
         div.className = 'day';
+
+        // ADD BOTTLE IMAGE
+        const imgHTML = w.image 
+          ? `<img src="${w.image}" alt="${w.name} bottle" class="bottle-img">` 
+          : '';
+
         div.innerHTML = `
+          ${imgHTML}
           <h3>Day ${w.day}</h3>
           <p><strong>${w.name}</strong></p>
           <p>${w.distiller}</p>
@@ -79,7 +86,10 @@ function startCountdown() {
   const countdownEl = document.getElementById('countdown');
   if (!countdownEl) return;
 
+  // Run immediately
   updateCountdown(countdownEl);
+
+  // Then every second
   setInterval(() => updateCountdown(countdownEl), 1000);
 }
 
@@ -109,10 +119,4 @@ function updateCountdown(el) {
   el.innerHTML = days > 0 
     ? `${days}d ${hours}h ${minutes}m ${seconds}s`
     : `${hours}h ${minutes}m ${seconds}s`;
-
-  // DEBUG: Test image loading
-const img = new Image();
-img.src = 'Day 1.jpg';
-img.onload = () => console.log('✅ Day 1.jpg LOADED');
-img.onerror = () => console.log('❌ Day 1.jpg FAILED');
 }
