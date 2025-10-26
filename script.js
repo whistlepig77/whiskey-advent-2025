@@ -6,7 +6,7 @@ function checkPassword() {
     document.getElementById('password-screen').classList.add('hidden');
     document.getElementById('status').classList.remove('hidden');
     document.getElementById('calendar').classList.remove('hidden');
-    document.getElementById('next-hint').classList.remove('foreground');
+    document.getElementById('next-hint').classList.remove('hidden');
     loadCalendar().then(startCountdown);
   } else {
     alert("Wrong password. Ask the host.");
@@ -23,7 +23,7 @@ async function loadCalendar() {
     const whiskeys = await res.json();
 
     const now = new Date();
-    const estOffset = -5 * 60; // EST = UTC-5
+    const estOffset = -5 * 60;
     const estNow = new Date(now.getTime() + estOffset * 60 * 1000);
 
     const calendar = document.getElementById('calendar');
@@ -38,7 +38,7 @@ async function loadCalendar() {
         div.className = 'day';
 
         const imgHTML = w.image 
-          ? `<img src="${w.image}" alt="${w.name} bottle" class="bottle-img">` 
+          ? `<img src="${w.image}" alt="${w.name} bottle" class="bottle-img" onclick="openModal('${w.image}')">` 
           : '';
 
         const tastingHTML = w.tastingNotes ? `
@@ -54,7 +54,7 @@ async function loadCalendar() {
           ${imgHTML}
           <h3>Day ${w.day}</h3>
           <p><strong>${w.name}</strong></p>
-          <p>${w.distillery}</p>  <!-- FIXED: was w.distiller -->
+          <p>${w.distillery}</p>
           ${w.notes ? `<p><em>${w.notes}</em></p>` : ''}
           ${w.selectedBy ? `<p>Selected by: <strong>${w.selectedBy}</strong></p>` : ''}
           <p>${w.type} • ${w.age} • ${w.proof}</p>
