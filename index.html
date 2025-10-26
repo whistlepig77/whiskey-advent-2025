@@ -51,6 +51,8 @@
     .taster-instructions h3 {
       color: #d4af37;
       font-size: 2.2rem;
+
+
       margin: 0 0 18px 0;
       font-weight: 600;
     }
@@ -201,8 +203,35 @@
       font-size: 2.2rem;
     }
 
-    /* Footer - REMOVED */
-    /* No footer text */
+    /* QR CODE & URL */
+    .qr-section {
+      margin-top: 60px;
+      padding: 20px;
+      background: rgba(20, 30, 30, 0.7);
+      border-radius: 16px;
+      border: 2px solid #d4af37;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+    .qr-section img {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+      margin: 0 auto 15px;
+      display: block;
+      border: 3px solid #d4af37;
+      border-radius: 12px;
+      padding: 8px;
+      background: white;
+    }
+    .qr-section p {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #d4af37;
+      word-break: break-all;
+    }
   </style>
 </head>
 <body>
@@ -210,9 +239,9 @@
     <header>
       <h1>Wally's Whiskey Advent Calendar 2025</h1>
 
-      <div class="intro-text">
+      <div class="$_intro-text">
         <p><strong>Our 12-Day Whiskey Countdown to Christmas!</strong><br>
-        <em>The traditional "12 Days of Christmas" runs from Dec 25 to Jan 5. But we’re doing it our way: <strong>one legendary pour each day from Dec 14 to Christmas Day</strong> — because who waits that long for good whiskey?</em></p>
+        <em>The traditional "12 Days of Christmas" <strong>runs</strong> from Dec 25 to Jan 5. But we’re doing it our way: <strong>one legendary pour each day from Dec 14 to Christmas Day</strong> — because who waits that long for good whiskey?</em></p>
       </div>
 
       <div class="taster-instructions">
@@ -236,7 +265,11 @@
     <div id="calendar" class="hidden"></div>
     <p id="next-hint" class="hidden"></p>
 
-    <!-- FOOTER REMOVED -->
+    <!-- QR CODE & URL -->
+    <div class="qr-section">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://whistlepig77.github.io/whiskey-advent-2025/" alt="Scan to visit site">
+      <p>https://whistlepig77.github.io/whiskey-advent-2025/</p>
+    </div>
   </div>
 
   <!-- ZOOM MODAL -->
