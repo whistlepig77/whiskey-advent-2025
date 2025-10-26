@@ -104,7 +104,7 @@
       right: 30px;
       color: #fff;
       font-size: 40px;
-      font-weight: bolder;
+      font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
     }
@@ -241,34 +241,11 @@
     </footer>
   </div>
 
-  <!-- ZOOM MODAL -->
+  <!-- ZOOM MODAL (HTML ONLY) -->
   <div id="zoomModal" class="modal">
     <span class="close" onclick="closeModal()">×</span>
     <img id="zoomedImg" src="" alt="Zoomed bottle">
   </div>
-
-  <script>
-    // Open modal with clicked image
-    function openModal(src) {
-      const modal = document.getElementById('zoomModal');
-      const zoomedImg = document.getElementById('zoomedImg');
-      modal.style.display = 'flex';
-      zoomedImg.src = src;
-    }
-
-    // Close modal
-    function closeModal() {
-      document.getElementById('zoomModal').style.display = 'none';
-    }
-
-    // Close on outside click
-    window.onclick = function(event) {
-      const modal = document.getElementById('zoomModal');
-      if (event.target === modal) {
-        closeModal();
-      }
-    }
-  </script>
 
   <script src="script.js"></script>
 </body>
