@@ -64,7 +64,7 @@ async function loadCalendar() {
         calendar.appendChild(div);
         revealedCount++;
       } else if (!nextWhiskey) {
-        nextWhiskey = w;  // Save first future whiskey
+        nextWhiskey = w; // Save first future whiskey
       }
     });
 
