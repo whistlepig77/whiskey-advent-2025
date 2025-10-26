@@ -1,26 +1,5 @@
 const PASSWORD = "wally";
 
-// === MODAL FUNCTIONS (MUST BE AT TOP) ===
-function openModal(src) {
-  const modal = document.getElementById('zoomModal');
-  const zoomedImg = document.getElementById('zoomedImg');
-  modal.style.display = 'flex';
-  zoomedImg.src = src;
-}
-
-function closeModal() {
-  document.getElementById('zoomModal').style.display = 'none';
-}
-
-// Close on outside click
-window.onclick = function(event) {
-  const modal = document.getElementById('zoomModal');
-  if (event.target === modal) {
-    closeModal();
-  }
-};
-// ======================================
-
 function checkPassword() {
   const input = document.getElementById('pass').value.trim();
   if (input === PASSWORD) {
@@ -51,6 +30,7 @@ async function loadCalendar() {
     calendar.innerHTML = '';
 
     let revealedCount = 0;
+    let nextWhiskey = null;
 
     whiskeys.forEach(w => {
       const unlockTime = new Date(w.date + 'T08:00:00-05:00');
@@ -83,12 +63,9 @@ async function loadCalendar() {
         `;
         calendar.appendChild(div);
         revealedCount++;
+      } else if (!nextWhiskey) {
+        nextWhiskey = w;  // Save first future whiskey
       }
-    });
-
-    const nextWhiskey = whiskeys.find(w => {
-      const unlockTime = new Date(w.date + 'T08:00:00-05:00');
-      return estNow < unlockTime;
     });
 
     const nextHint = document.getElementById('next-hint');
@@ -106,6 +83,11 @@ async function loadCalendar() {
 
     status.innerHTML = `Revealed: <strong>${revealedCount}</strong> of 12`;
 
+    // Store next unlock time for countdown
+    window.nextUnlockTime = nextWhiskey 
+      ? new Date(nextWhiskey.date + 'T08:00:00-05:00') 
+      : null;
+
   } catch (err) {
     status.textContent = "Error. Try refreshing.";
     console.error(err);
@@ -114,7 +96,7 @@ async function loadCalendar() {
 
 function startCountdown() {
   const countdownEl = document.getElementById('countdown');
-  if (!countdownEl) return;
+  if (!countdownEl || !window.nextUnlockTime) return;
 
   updateCountdown(countdownEl);
   setInterval(() => updateCountdown(countdownEl), 1000);
@@ -125,10 +107,10 @@ function updateCountdown(el) {
   const estOffset = -5 * 60;
   const estNow = new Date(now.getTime() + estOffset * 60 * 1000);
 
-  let nextUnlock = new Date(estNow);
-  nextUnlock.setHours(8, 0, 0, 0);
-  if (estNow >= nextUnlock) {
-    nextUnlock.setDate(nextUnlock.getDate() + 1);
+  const nextUnlock = window.nextUnlockTime;
+  if (!nextUnlock) {
+    el.textContent = "All done!";
+    return;
   }
 
   const diff = nextUnlock - estNow;
