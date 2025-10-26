@@ -1,5 +1,26 @@
 const PASSWORD = "wally";
 
+// === MODAL FUNCTIONS (MUST BE AT TOP) ===
+function openModal(src) {
+  const modal = document.getElementById('zoomModal');
+  const zoomedImg = document.getElementById('zoomedImg');
+  modal.style.display = 'flex';
+  zoomedImg.src = src;
+}
+
+function closeModal() {
+  document.getElementById('zoomModal').style.display = 'none';
+}
+
+// Close on outside click
+window.onclick = function(event) {
+  const modal = document.getElementById('zoomModal');
+  if (event.target === modal) {
+    closeModal();
+  }
+};
+// ======================================
+
 function checkPassword() {
   const input = document.getElementById('pass').value.trim();
   if (input === PASSWORD) {
