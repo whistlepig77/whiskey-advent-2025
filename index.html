@@ -13,67 +13,67 @@
       margin: 0;
       padding: 0;
       min-height: 100vh;
-      font-size: 18px; /* ↑ BASE FONT SIZE (was 16px) */
+      font-size: 20px; /* ↑ EVEN BIGGER BASE (was 18px) */
     }
     .container {
-      max-width: 900px; /* ↑ Wider for bigger text */
+      max-width: 1000px; /* ↑ Wider for large text */
       margin: 0 auto;
-      padding: 30px;
+      padding: 35px;
       text-align: center;
     }
     header {
-      margin-bottom: 40px;
+      margin-bottom: 50px;
     }
     h1 {
       font-family: 'Mountains of Christmas', cursive;
-      font-size: 4.5rem; /* ↑ BIGGER TITLE (was 3.2rem) */
+      font-size: 4.5rem; /* ← TITLE STAYS BIG (as requested) */
       color: #d4af37;
       text-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
-      margin: 20px 0;
+      margin: 25px 0;
       letter-spacing: 3px;
     }
     .intro-text, .taster-instructions {
       text-align: left;
       background: rgba(20, 30, 30, 0.7);
-      padding: 24px;
-      border-radius: 14px;
-      border: 1px solid #3a5a5a;
-      margin: 20px 0;
-      max-width: 800px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-      backdrop-filter: blur(3px);
-      font-size: 1.1rem; /* ↑ BIGGER PARAGRAPHS */
-      line-height: 1.7;
+      padding: 30px;
+      border-radius: 16px;
+      border: 2px solid #3a5a5a;
+      margin: 25px 0;
+      max-width: 900px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      backdrop-filter: blur(4px);
+      font-size: 1.4rem; /* ↑ MUCH BIGGER (was 1.1rem) */
+      line-height: 1.8;
     }
     .intro-text p, .taster-instructions p {
-      margin: 0 0 16px 0;
+      margin: 0 0 20px 0;
     }
     .taster-instructions h3 {
       color: #d4af37;
-      font-size: 1.8rem; /* ↑ BIGGER SUBHEAD */
-      margin: 0 0 14px 0;
+      font-size: 2.2rem; /* ↑ HUGE SUBHEAD (was 1.8rem) */
+      margin: 0 0 18px 0;
       font-weight: 600;
     }
     .taster-instructions ol {
-      margin: 16px 0;
-      padding-left: 28px;
+      margin: 20px 0;
+      padding-left: 35px;
     }
     .taster-instructions li {
-      margin: 12px 0;
-      font-size: 1.1rem;
-      line-height: 1.6;
+      margin: 16px 0;
+      font-size: 1.4rem; /* ↑ BIGGER LIST ITEMS */
+      line-height: 1.7;
     }
 
     /* BOTTLE IMAGES */
     .bottle-img {
       width: 100%;
-      max-width: 250px; /* ↑ BIGGER IMAGE */
+      max-width: 300px; /* ↑ BIGGER IMAGE */
       height: auto;
-      border-radius: 14px;
-      margin: 16px auto;
+      border-radius: 16px;
+      margin: 20px auto;
       display: block;
       border: 3px solid #d4af37;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
       cursor: zoom-in;
       transition: transform 0.3s ease;
     }
@@ -96,17 +96,17 @@
       overflow: auto;
     }
     .modal img {
-      max-width: 92%;
-      max-height: 92vh;
-      border-radius: 14px;
-      box-shadow: 0 0 35px rgba(212, 175, 55, 0.6);
+      max-width: 94%;
+      max-height: 94vh;
+      border-radius: 16px;
+      box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
     }
     .close {
       position: absolute;
-      top: 25px;
-      right: 35px;
+      top: 30px;
+      right: 40px;
       color: #fff;
-      font-size: 45px;
+      font-size: 50px;
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
@@ -117,33 +117,33 @@
 
     /* Password Box */
     #password-screen {
-      margin: 40px auto;
-      padding: 25px;
+      margin: 50px auto;
+      padding: 30px;
       background: rgba(212, 175, 55, 0.2);
       border: 3px solid #d4af37;
-      border-radius: 18px;
-      max-width: 450px;
-      box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+      border-radius: 20px;
+      max-width: 500px;
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
     }
     #pass {
-      padding: 14px;
+      padding: 16px;
       width: 70%;
       border: 2px solid #d4af37;
-      border-radius: 10px;
-      font-size: 1.2rem;
+      border-radius: 12px;
+      font-size: 1.4rem;
       background: #fff;
       color: #1a2a2a;
     }
     button {
-      padding: 14px 24px;
+      padding: 16px 28px;
       background: #c41e3a;
       color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       font-weight: bold;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       cursor: pointer;
-      margin-left: 12px;
+      margin-left: 15px;
       transition: 0.3s;
     }
     button:hover {
@@ -155,73 +155,63 @@
     .day {
       background: rgba(212, 175, 55, 0.2);
       border: 2px solid #d4af37;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 16px 0;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      border-radius: 14px;
+      padding: 25px;
+      margin: 20px 0;
+      box-shadow: 0 5px 16px rgba(0,0,0,0.2);
     }
     .day h3 {
       color: #d4af37;
-      margin: 0 0 10px 0;
-      font-size: 1.6rem;
+      margin: 0 0 12px 0;
+      font-size: 2rem; /* ↑ BIGGER DAY TITLE */
     }
 
     /* Tasting Notes */
     .tasting-notes {
-      margin-top: 16px;
-      padding: 14px;
+      margin-top: 20px;
+      padding: 16px;
       background: rgba(212, 175, 55, 0.15);
-      border: 1px solid #d4af37;
-      border-radius: 10px;
-      font-size: 1rem;
+      border: 2px solid #d4af37;
+      border-radius: 12px;
+      font-size: 1.2rem; /* ↑ BIGGER NOTES */
     }
     .tasting-notes h4 {
       color: #d4af37;
-      margin: 0 0 8px 0;
-      font-size: 1.3rem;
+      margin: 0 0 10px 0;
+      font-size: 1.6rem;
     }
     .tasting-notes div {
-      margin: 6px 0;
-      line-height: 1.5;
+      margin: 8px 0;
+      line-height: 1.6;
     }
 
     /* Countdown */
     #next-hint {
-      font-size: 1.5rem;
-      margin: 30px 0;
-      padding: 16px;
-      background: rgba(196, 30, 58, 0.25);
+      font-size: 1.8rem;
+      margin: 35px 0;
+      padding: 20px;
+      background: rgba(196, 30, 58, 0.3);
       border: 2px solid #c41e3a;
-      border-radius: 12px;
+      border-radius: 14px;
       color: #fff;
     }
     #countdown {
       color: #d4af37;
       font-weight: bold;
-      font-size: 1.8rem;
+      font-size: 2.2rem; /* ↑ HUGE COUNTDOWN */
     }
 
     /* Footer */
     footer {
-      margin-top: 60px;
-      font-size: 1.1rem;
+      margin-top: 70px;
+      font-size: 1.3rem;
       color: #aaa;
-    }
-
-    /* LOGO */
-    .logo {
-      width: 140px;
-      height: auto;
-      margin: 0 auto 15px;
-      display: block;
-      filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6));
     }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <img src="logo.png" alt="Wally's Logo" class="logo">
       <h1>Wally's Whiskey Advent Calendar 2025</h1>
 
       <div class="intro-text">
