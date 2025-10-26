@@ -64,7 +64,7 @@ async function loadCalendar() {
         calendar.appendChild(div);
         revealedCount++;
       } else if (!nextWhiskey) {
-        nextWhiskey = w; // Save first future whiskey
+        nextWhiskey = w;
       }
     });
 
@@ -76,14 +76,13 @@ async function loadCalendar() {
         month: 'long',
         day: 'numeric'
       });
-      nextHint.innerHTML = `Next pour in: <strong id="countdown">Calculating...</strong> (${formatted} at 8:00 AM EST)`;
+      nextHint.innerHTML = `Next pour <strong>revealed</strong> in: <strong id="countdown">Calculating...</strong> (${formatted} at 8:00 AM EST)`;
     } else {
       nextHint.textContent = "All whiskeys revealed! Merry Christmas!";
     }
 
     status.innerHTML = `Revealed: <strong>${revealedCount}</strong> of 12`;
 
-    // Store next unlock time for countdown
     window.nextUnlockTime = nextWhiskey 
       ? new Date(nextWhiskey.date + 'T08:00:00-05:00') 
       : null;
