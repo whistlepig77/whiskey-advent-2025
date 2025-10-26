@@ -37,10 +37,19 @@ async function loadCalendar() {
         const div = document.createElement('div');
         div.className = 'day';
 
-        // ADD BOTTLE IMAGE
         const imgHTML = w.image 
           ? `<img src="${w.image}" alt="${w.name} bottle" class="bottle-img">` 
           : '';
+
+        // TASTING NOTES HTML
+        const tastingHTML = w.tastingNotes ? `
+          <div class="tasting-notes">
+            <h4>Tasting Notes</h4>
+            <div><strong>Nose:</strong> ${w.tastingNotes.nose}</div>
+            <div><strong>Palate:</strong> ${w.tastingNotes.palate}</div>
+            <div><strong>Finish:</strong> ${w.tastingNotes.finish}</div>
+          </div>
+        ` : '';
 
         div.innerHTML = `
           ${imgHTML}
@@ -50,6 +59,7 @@ async function loadCalendar() {
           ${w.notes ? `<p><em>${w.notes}</em></p>` : ''}
           ${w.selectedBy ? `<p>Selected by: <strong>${w.selectedBy}</strong></p>` : ''}
           <p>${w.type} • ${w.age} • ${w.proof}</p>
+          ${tastingHTML}
         `;
         calendar.appendChild(div);
         revealedCount++;
@@ -86,10 +96,7 @@ function startCountdown() {
   const countdownEl = document.getElementById('countdown');
   if (!countdownEl) return;
 
-  // Run immediately
   updateCountdown(countdownEl);
-
-  // Then every second
   setInterval(() => updateCountdown(countdownEl), 1000);
 }
 
