@@ -20,7 +20,6 @@
       margin: 0 auto;
       padding: 20px;
       text-align: center;
-      position: relative;
     }
     header {
       margin-bottom: 30px;
@@ -61,19 +60,6 @@
     .taster-instructions li {
       margin: 8px 0;
       line-height: 1.5;
-    }
-    .snowflake {
-      position: absolute;
-      color: #fff;
-      font-size: 1.2rem;
-      opacity: 0.7;
-      pointer-events: none;
-      animation: fall linear infinite;
-    }
-    @keyframes fall {
-      to {
-        transform: translateY(100vh) rotate(360deg);
-      }
     }
 
     /* Password Box */
@@ -185,24 +171,6 @@
       <p>Made with <span style="color: #c41e3a;">heart</span> and <span style="color: #d4af37;">whiskey</span> by Wally</p>
     </footer>
   </div>
-
-  <!-- Christmas Snowflakes -->
-  <script>
-    // Create falling snowflakes
-    function createSnowflake() {
-      const flake = document.createElement('div');
-      flake.classList.add('snowflake');
-      flake.innerHTML = ['snowflake', 'snowflake', 'snowflake', 'snowflake', 'snowflake'][Math.floor(Math.random() * 5)] || 'snowflake';
-      flake.style.left = Math.random() * 100 + 'vw';
-      flake.style.animationDuration = Math.random() * 3 + 4 + 's';
-      flake.style.opacity = Math.random() * 0.5 + 0.3;
-      flake.style.fontSize = Math.random() * 10 + 10 + 'px';
-      document.body.appendChild(flake);
-
-      setTimeout(() => flake.remove(), 8000);
-    }
-    setInterval(createSnowflake, 300);
-  </script>
 
   <script src="script.js"></script>
 </body>
