@@ -13,69 +13,72 @@
       margin: 0;
       padding: 0;
       min-height: 100vh;
+      font-size: 18px; /* ↑ BASE FONT SIZE (was 16px) */
     }
     .container {
-      max-width: 800px;
+      max-width: 900px; /* ↑ Wider for bigger text */
       margin: 0 auto;
-      padding: 20px;
+      padding: 30px;
       text-align: center;
     }
     header {
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
     h1 {
       font-family: 'Mountains of Christmas', cursive;
-      font-size: 3.2rem;
+      font-size: 4.5rem; /* ↑ BIGGER TITLE (was 3.2rem) */
       color: #d4af37;
-      text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+      text-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
       margin: 20px 0;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
     }
     .intro-text, .taster-instructions {
       text-align: left;
       background: rgba(20, 30, 30, 0.7);
-      padding: 18px;
-      border-radius: 12px;
+      padding: 24px;
+      border-radius: 14px;
       border: 1px solid #3a5a5a;
-      margin: 16px 0;
-      max-width: 700px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      margin: 20px 0;
+      max-width: 800px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
       backdrop-filter: blur(3px);
+      font-size: 1.1rem; /* ↑ BIGGER PARAGRAPHS */
+      line-height: 1.7;
     }
     .intro-text p, .taster-instructions p {
-      margin: 0 0 12px 0;
-      line-height: 1.6;
+      margin: 0 0 16px 0;
     }
     .taster-instructions h3 {
       color: #d4af37;
-      font-size: 1.4rem;
-      margin: 0 0 12px 0;
+      font-size: 1.8rem; /* ↑ BIGGER SUBHEAD */
+      margin: 0 0 14px 0;
       font-weight: 600;
     }
     .taster-instructions ol {
-      margin: 12px 0;
-      padding-left: 22px;
+      margin: 16px 0;
+      padding-left: 28px;
     }
     .taster-instructions li {
-      margin: 8px 0;
-      line-height: 1.5;
+      margin: 12px 0;
+      font-size: 1.1rem;
+      line-height: 1.6;
     }
 
     /* BOTTLE IMAGES */
     .bottle-img {
       width: 100%;
-      max-width: 200px;
+      max-width: 250px; /* ↑ BIGGER IMAGE */
       height: auto;
-      border-radius: 12px;
-      margin: 12px auto;
+      border-radius: 14px;
+      margin: 16px auto;
       display: block;
-      border: 2px solid #d4af37;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      border: 3px solid #d4af37;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
       cursor: zoom-in;
       transition: transform 0.3s ease;
     }
     .bottle-img:hover {
-      transform: scale(1.05);
+      transform: scale(1.06);
     }
 
     /* ZOOM MODAL */
@@ -93,17 +96,17 @@
       overflow: auto;
     }
     .modal img {
-      max-width: 90%;
-      max-height: 90vh;
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+      max-width: 92%;
+      max-height: 92vh;
+      border-radius: 14px;
+      box-shadow: 0 0 35px rgba(212, 175, 55, 0.6);
     }
     .close {
       position: absolute;
-      top: 20px;
-      right: 30px;
+      top: 25px;
+      right: 35px;
       color: #fff;
-      font-size: 40px;
+      font-size: 45px;
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
@@ -114,100 +117,111 @@
 
     /* Password Box */
     #password-screen {
-      margin: 30px auto;
-      padding: 20px;
-      background: rgba(212, 175, 55, 0.15);
-      border: 2px solid #d4af37;
-      border-radius: 15px;
-      max-width: 400px;
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+      margin: 40px auto;
+      padding: 25px;
+      background: rgba(212, 175, 55, 0.2);
+      border: 3px solid #d4af37;
+      border-radius: 18px;
+      max-width: 450px;
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
     }
     #pass {
-      padding: 12px;
+      padding: 14px;
       width: 70%;
-      border: 1px solid #d4af37;
-      border-radius: 8px;
-      font-size: 1rem;
+      border: 2px solid #d4af37;
+      border-radius: 10px;
+      font-size: 1.2rem;
       background: #fff;
       color: #1a2a2a;
     }
     button {
-      padding: 12px 20px;
+      padding: 14px 24px;
       background: #c41e3a;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-weight: bold;
+      font-size: 1.2rem;
       cursor: pointer;
-      margin-left: 10px;
+      margin-left: 12px;
       transition: 0.3s;
     }
     button:hover {
       background: #a0172e;
-      transform: scale(1.05);
+      transform: scale(1.06);
     }
 
     /* Revealed Days */
     .day {
-      background: rgba(212, 175, 55, 0.15);
-      border: 1px solid #d4af37;
-      border-radius: 10px;
-      padding: 16px;
-      margin: 12px 0;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      background: rgba(212, 175, 55, 0.2);
+      border: 2px solid #d4af37;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 16px 0;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
     }
     .day h3 {
       color: #d4af37;
-      margin: 0 0 8px 0;
-      font-size: 1.3rem;
+      margin: 0 0 10px 0;
+      font-size: 1.6rem;
     }
 
     /* Tasting Notes */
     .tasting-notes {
-      margin-top: 12px;
-      padding: 10px;
-      background: rgba(212, 175, 55, 0.1);
+      margin-top: 16px;
+      padding: 14px;
+      background: rgba(212, 175, 55, 0.15);
       border: 1px solid #d4af37;
-      border-radius: 8px;
-      font-size: 0.9em;
+      border-radius: 10px;
+      font-size: 1rem;
     }
     .tasting-notes h4 {
       color: #d4af37;
-      margin: 0 0 6px 0;
-      font-size: 1.1em;
+      margin: 0 0 8px 0;
+      font-size: 1.3rem;
     }
     .tasting-notes div {
-      margin: 4px 0;
-      line-height: 1.4;
+      margin: 6px 0;
+      line-height: 1.5;
     }
 
     /* Countdown */
     #next-hint {
-      font-size: 1.2rem;
-      margin: 20px 0;
-      padding: 12px;
-      background: rgba(196, 30, 58, 0.2);
-      border: 1px solid #c41e3a;
-      border-radius: 10px;
+      font-size: 1.5rem;
+      margin: 30px 0;
+      padding: 16px;
+      background: rgba(196, 30, 58, 0.25);
+      border: 2px solid #c41e3a;
+      border-radius: 12px;
       color: #fff;
     }
     #countdown {
       color: #d4af37;
       font-weight: bold;
-      font-size: 1.3rem;
+      font-size: 1.8rem;
     }
 
     /* Footer */
     footer {
-      margin-top: 50px;
-      font-size: 0.9rem;
-      color: #888;
+      margin-top: 60px;
+      font-size: 1.1rem;
+      color: #aaa;
+    }
+
+    /* LOGO */
+    .logo {
+      width: 140px;
+      height: auto;
+      margin: 0 auto 15px;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6));
     }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
+      <img src="logo.png" alt="Wally's Logo" class="logo">
       <h1>Wally's Whiskey Advent Calendar 2025</h1>
 
       <div class="intro-text">
@@ -249,7 +263,7 @@
 
   <script src="script.js"></script>
 
-  <!-- MODAL FUNCTIONS (MUST BE AFTER MODAL HTML) -->
+  <!-- MODAL FUNCTIONS -->
   <script>
     function openModal(src) {
       const modal = document.getElementById('zoomModal');
