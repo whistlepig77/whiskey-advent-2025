@@ -6,7 +6,7 @@ function checkPassword() {
     document.getElementById('password-screen').classList.add('hidden');
     document.getElementById('status').classList.remove('hidden');
     document.getElementById('calendar').classList.remove('hidden');
-    document.getElementById('next-hint').classList.remove('hidden');
+    document.getElementById('next-hint').classList.remove('foreground');
     loadCalendar().then(startCountdown);
   } else {
     alert("Wrong password. Ask the host.");
@@ -41,7 +41,6 @@ async function loadCalendar() {
           ? `<img src="${w.image}" alt="${w.name} bottle" class="bottle-img">` 
           : '';
 
-        // TASTING NOTES HTML
         const tastingHTML = w.tastingNotes ? `
           <div class="tasting-notes">
             <h4>Tasting Notes</h4>
@@ -55,7 +54,7 @@ async function loadCalendar() {
           ${imgHTML}
           <h3>Day ${w.day}</h3>
           <p><strong>${w.name}</strong></p>
-          <p>${w.distiller}</p>
+          <p>${w.distillery}</p>  <!-- FIXED: was w.distiller -->
           ${w.notes ? `<p><em>${w.notes}</em></p>` : ''}
           ${w.selectedBy ? `<p>Selected by: <strong>${w.selectedBy}</strong></p>` : ''}
           <p>${w.type} • ${w.age} • ${w.proof}</p>
