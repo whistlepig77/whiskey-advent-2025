@@ -7,7 +7,7 @@ function checkPassword() {
     document.getElementById('status').classList.remove('hidden');
     document.getElementById('calendar').classList.remove('hidden');
     document.getElementById('next-hint').classList.remove('hidden');
-    loadCalendar().then(startCountdown); // Wait for load → then start
+    loadCalendar().then(startCountdown);
   } else {
     alert("Wrong password. Ask the host.");
   }
@@ -18,12 +18,12 @@ async function loadCalendar() {
   status.textContent = "Loading...";
 
   try {
-    const res = await fetch('w.json');
+    const res = await fetch('whiskeys.json');
     if (!res.ok) throw new Error('Failed to load whiskeys.json');
     const whiskeys = await res.json();
 
     const now = new Date();
-    const estOffset = -5 * 60;
+    const estOffset = -5 * 60; // EST = UTC-5
     const estNow = new Date(now.getTime() + estOffset * 60 * 1000);
 
     const calendar = document.getElementById('calendar');
@@ -79,7 +79,7 @@ function startCountdown() {
   const countdownEl = document.getElementById('countdown');
   if (!countdownEl) return;
 
-  // Run immediately once
+  // Run immediately
   updateCountdown(countdownEl);
 
   // Then every second
