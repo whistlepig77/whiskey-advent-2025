@@ -1,4 +1,4 @@
-const PASSWORD = "whiskey2025";
+const PASSWORD = "wally";
 
 function checkPassword() {
   const input = document.getElementById('pass').value.trim();
@@ -18,12 +18,12 @@ async function loadCalendar() {
   status.textContent = "Loading...";
 
   try {
-    const res = await fetch('whiskeys.json');  // FIXED: was 'w.json'
+    const res = await fetch('whiskeys.json');
     if (!res.ok) throw new Error('Failed to load whiskeys.json');
     const whiskeys = await res.json();
 
     const now = new Date();
-    const estOffset = -5 * 60; // EST = UTC-5
+    const estOffset = -5 * 60;
     const estNow = new Date(now.getTime() + estOffset * 60 * 1000);
 
     const calendar = document.getElementById('calendar');
@@ -79,10 +79,7 @@ function startCountdown() {
   const countdownEl = document.getElementById('countdown');
   if (!countdownEl) return;
 
-  // Run immediately
   updateCountdown(countdownEl);
-
-  // Then every second
   setInterval(() => updateCountdown(countdownEl), 1000);
 }
 
