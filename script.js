@@ -9,7 +9,7 @@ function checkPassword() {
     document.getElementById('next-hint').classList.remove('hidden');
     loadCalendar().then(startCountdown);
   } else {
-    alert("Wrong password. Ask the host.");
+    alert("Wrong password. The password is: wally");
   }
 }
 
