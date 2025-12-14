@@ -76,7 +76,7 @@ async function loadCalendar() {
         month: 'long',
         day: 'numeric'
       });
-      nextHint.innerHTML = `Next pour <strong>revealed</strong> in: <strong id="countdown">Calculating...</strong> (${formatted} at 8:00 AM EST)`;
+      nextHint.innerHTML = `Next pour <strong>revealed</strong> in: <strong id="countdown">Calculating...</strong> (${formatted} at 1:00PM EST)`;
     } else {
       nextHint.textContent = "All whiskeys revealed! Merry Christmas!";
     }
